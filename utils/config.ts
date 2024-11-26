@@ -1,7 +1,7 @@
 import { Config, ConfigSchema } from "../schemas/config.ts";
 
 export const loadConfig = async (): Promise<Config> => {
-  const configPath = Deno.env.get("CONFIG_PATH") ?? "/config.js";
+  const configPath = Deno.env.get("CONFIG_PATH") ?? "/config/config.js";
 
   try {
     const config = await import(`file://${configPath}`);

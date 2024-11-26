@@ -1,0 +1,10 @@
+.env
+
+local-config/*
+http/*
+.github
+.idea
+.gitignore
+README.md
+Dockerfile
+.vscode

@@ -1,7 +1,0 @@
-### GET request to example server
-POST http://localhost:8000/webhooks/radarr/on-file-upgraded
-Content-Type: application/json
-
-{
-   "movieId": 712
-}

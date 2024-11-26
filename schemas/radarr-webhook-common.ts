@@ -55,7 +55,7 @@ export const RadarrMovie = z.object({
   filePath: z.string().optional(),
   releaseDate: z.string().date().optional(),
   folderPath: z.string().optional(),
-  tmdbId: z.number().int(),
+  tmdbId: z.number().int().optional(),
   imdbId: z.string().optional(),
   overview: z.string().optional(),
   genres: z.array(z.string()).optional(),
@@ -148,30 +148,30 @@ export const RadarrImportPayload = z.object({
   remoteMovie: RadarrRemoteMovie,
   movieFile: RadarrMovieFile,
   isUpgrade: z.boolean(),
-  downloadClient: z.string(),
-  downloadClientType: z.string(),
-  downloadId: z.string(),
+  downloadClient: z.string().optional(),
+  downloadClientType: z.string().optional(),
+  downloadId: z.string().optional(),
   deletedFiles: z.array(RadarrMovieFile).optional(),
-  customFormatInfo: RadarrCustomFormatInfo,
-  release: RadarrGrabbedRelease,
+  customFormatInfo: RadarrCustomFormatInfo.optional(),
+  release: RadarrGrabbedRelease.optional(),
 });
 
 export const RadarrManualInteractionPayload = z.object({
   movie: RadarrMovie,
   downloadInfo: RadarrDownloadClientItem,
-  downloadClient: z.string(),
-  downloadClientType: z.string(),
-  downloadId: z.string(),
-  downloadStatus: z.string(),
-  downloadStatusMessages: z.array(RadarrDownloadStatusMessage),
-  customFormatInfo: RadarrCustomFormatInfo,
-  release: RadarrGrabbedRelease,
+  downloadClient: z.string().optional(),
+  downloadClientType: z.string().optional(),
+  downloadId: z.string().optional(),
+  downloadStatus: z.string().optional(),
+  downloadStatusMessages: z.array(RadarrDownloadStatusMessage).optional(),
+  customFormatInfo: RadarrCustomFormatInfo.optional(),
+  release: RadarrGrabbedRelease.optional(),
 });
 
 export const RadarrMovieDeletePayload = z.object({
   movie: RadarrMovie,
-  deletedFiles: z.boolean(),
-  movieFolderSize: z.number().int(),
+  deletedFiles: z.boolean().optional(),
+  movieFolderSize: z.number().int().optional(),
 });
 
 export const RadarrMovieFileDeletePayload = z.object({

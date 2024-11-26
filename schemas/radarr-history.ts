@@ -1,19 +1,19 @@
 import { z } from "zod";
 
 export const GrabbedHistoryDataSchema = z.object({
-  indexer: z.string(),
-  releaseGroup: z.string(),
-  age: z.string(),
-  ageHours: z.string(),
-  ageMinutes: z.string(),
-  publishedDate: z.string(),
-  downloadClient: z.string(),
-  downloadClientName: z.string(),
-  size: z.string(),
-  downloadUrl: z.string(),
-  guid: z.string(),
-  tmdbId: z.string(),
-  imdbId: z.string(),
+  indexer: z.string().optional(),
+  releaseGroup: z.string().optional(),
+  age: z.string().optional(),
+  ageHours: z.string().optional(),
+  ageMinutes: z.string().optional(),
+  publishedDate: z.string().optional(),
+  downloadClient: z.string().optional(),
+  downloadClientName: z.string().optional(),
+  size: z.string().optional(),
+  downloadUrl: z.string().optional(),
+  guid: z.string().optional(),
+  tmdbId: z.string().optional(),
+  imdbId: z.string().optional(),
 });
 
 export const DownloadFailedHistorySchema = z.object({
@@ -23,8 +23,8 @@ export const DownloadFailedHistorySchema = z.object({
 export const DownloadFolderImportedHistorySchema = z.object({
   fileId: z.string().optional(),
   customFormatScore: z.string().optional(),
-  downloadClient: z.string(),
-  downloadClientName: z.string(),
+  downloadClient: z.string().optional(),
+  downloadClientName: z.string().optional(),
   droppedPath: z.string(),
   importedPath: z.string(),
   releaseGroup: z.string().optional(),
