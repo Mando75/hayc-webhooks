@@ -5,6 +5,8 @@
 /.idea/
 /.vscode/
 
+/local-config/
+
 /node_modules
 
 .env
@@ -126,3 +128,4 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/deno,webstorm
+*.private.env.json

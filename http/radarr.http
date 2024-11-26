@@ -1,0 +1,6 @@
+### GET request to example server
+GET https://radarr.bmuller.net/api/v3/history/movie?movieId=712
+Accept: application/json
+X-Api-Key: {{apiKey}}
+
+###
