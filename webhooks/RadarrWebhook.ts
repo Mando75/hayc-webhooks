@@ -71,28 +71,39 @@ export class RadarrWebhook {
   constructor(config: Config) {
     this.config = config;
     const { webhooks } = config.radarr;
-    this.onGrab = webhooks.onGrab?.map((hook) => WebhookFunctions[hook]) ?? [];
+    this.onGrab =
+      webhooks.onGrab?.map((hook) => WebhookFunctions[hook.action]) ?? [];
     this.onDownload =
-      webhooks.onDownload?.map((hook) => WebhookFunctions[hook]) ?? [];
-    this.onRename = webhooks.onRename?.map((hook) => WebhookFunctions[hook]) ??
-      [];
+      webhooks.onDownload?.map((hook) => WebhookFunctions[hook.action](hook)) ??
+        [];
+    this.onRename =
+      webhooks.onRename?.map((hook) => WebhookFunctions[hook.action]) ??
+        [];
     this.onMovieAdded =
-      webhooks.onMovieAdded?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onMovieAdded?.map((hook) => WebhookFunctions[hook.action]) ?? [];
     this.onMovieFileDelete =
-      webhooks.onMovieFileDeleted?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onMovieFileDeleted?.map((hook) =>
+        WebhookFunctions[hook.action]
+      ) ?? [];
     this.onMovieDelete =
-      webhooks.onMovieDeleted?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onMovieDeleted?.map((hook) => WebhookFunctions[hook.action]) ??
+        [];
     this.onHealthIssue =
-      webhooks.onHealthIssue?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onHealthIssue?.map((hook) => WebhookFunctions[hook.action]) ??
+        [];
     this.onHealthIssueRestored =
-      webhooks.onHealthRestored?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onHealthRestored?.map((hook) => WebhookFunctions[hook.action]) ??
+        [];
     this.onApplicationUpdate =
-      webhooks.onApplicationUpdate?.map((hook) => WebhookFunctions[hook]) ?? [];
+      webhooks.onApplicationUpdate?.map((hook) =>
+        WebhookFunctions[hook.action]
+      ) ?? [];
     this.onManualInteractionRequired =
       webhooks.onManualInteractionRequired?.map((hook) =>
-        WebhookFunctions[hook]
+        WebhookFunctions[hook.action]
       ) ?? [];
-    this.onTest = webhooks.onTest?.map((hook) => WebhookFunctions[hook]) ?? [];
+    this.onTest =
+      webhooks.onTest?.map((hook) => WebhookFunctions[hook.action]) ?? [];
   }
 
   public async processWebhook(webhookPayload: unknown) {

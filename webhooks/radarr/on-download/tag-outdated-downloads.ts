@@ -2,29 +2,36 @@ import { RadarrApi } from "../../../clients/radarr.api.ts";
 import { QbitApi } from "../../../clients/qbit.api.ts";
 import { WebhookContext } from "../../RadarrWebhook.ts";
 import { RadarrOnDownloadPayload } from "../../../schemas/radarr-webhook-payload.ts";
+import { RadarrOnDownloadHooks } from "../../../schemas/config.ts";
+
+type TagOutdatedDownloadsConfig =
+  NonNullable<RadarrOnDownloadHooks>[number]["action"] extends
+    "tag-outdated-downloads" ? NonNullable<RadarrOnDownloadHooks>[number]
+    : never;
 
 /**
  * Searches through the history of a movie to find downloads that were deleted
  * due to upgrade. Tags the corresponding downloads in qBittorrent with the
  * configured upgrade tag.
  *
- * @param webhook
- * @param context
+ * @param config
  */
-export async function tagOutdatedDownloads(
-  webhook: RadarrOnDownloadPayload,
-  context: WebhookContext,
-): Promise<void> {
-  console.log(`Received upgrade for ${webhook.movie.id}`);
-  const deletedDownloadHashes = await getDeletedDownloadHashes(
-    webhook,
-    context.radarrApi,
-  );
-  await tagDownloads(
-    context.qbitApi,
-    deletedDownloadHashes,
-    context.config.radarr.upgradeTags,
-  );
+export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
+  return async (
+    webhook: RadarrOnDownloadPayload,
+    context: WebhookContext,
+  ): Promise<void> => {
+    console.log(`Received upgrade for ${webhook.movie.id}`);
+    const deletedDownloadHashes = await getDeletedDownloadHashes(
+      webhook,
+      context.radarrApi,
+    );
+    await tagDownloads(
+      context.qbitApi,
+      deletedDownloadHashes,
+      [config.tag],
+    );
+  };
 }
 
 /**

@@ -2,9 +2,11 @@ export default {
   radarr: {
     host: "http://localhost:7878",
     apiKey: "<your api key>",
-    upgradeTags: ["radarr-upgraded"],
     webhooks: {
-      onDownload: ["tag-outdated-downloads"],
+      onDownload: [{
+        action: 'tag-outdated-downloads',
+        tag: 'radarr-upgraded'
+      }]
     },
   },
   qbit: {
