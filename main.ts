@@ -13,4 +13,13 @@ app.post("/webhooks/radarr", async (c) => {
   return c.json({ message: "OK" }, 200);
 });
 
+app.post("/webhooks/sonarr", async (c) => {
+  const body = await c.req.json();
+  console.log("Starting Sonarr webhook handler");
+  console.log(JSON.stringify(body, null, 2));
+  console.log("\n\n\n\n");
+
+  return c.json({ message: "OK" }, 200);
+});
+
 Deno.serve(app.fetch);

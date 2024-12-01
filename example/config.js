@@ -4,9 +4,9 @@ export default {
     apiKey: "<your api key>",
     webhooks: {
       onDownload: [{
-        action: 'tag-outdated-downloads',
-        tag: 'radarr-upgraded'
-      }]
+        action: "tag-outdated-downloads",
+        tag: "radarr-upgraded",
+      }],
     },
   },
   qbit: {

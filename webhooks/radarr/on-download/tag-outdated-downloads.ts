@@ -44,6 +44,10 @@ async function getDeletedDownloadHashes(
   radarr: RadarrApi,
 ): Promise<string[]> {
   const history = await radarr.getMovieHistory(webhookPayload.movie.id);
+  // Get all the history events of a file being deleted.
+  // Get all the events of a download folder being imported.
+  // We will loop through each deleted event and try to find its matching import event
+  // the matching import event should contain the download id which we can use to tag the download
   const deletedEvents = history.filter((e) =>
     e.eventType === "movieFileDeleted"
   );
@@ -66,9 +70,10 @@ async function getDeletedDownloadHashes(
       continue;
     }
 
-    const correlatedImportEvent = importedEvents.find((event) =>
-      event.data.releaseGroup === deletedReleaseGroup &&
-      event.data.size === deletedSize
+    const correlatedImportEvent = importedEvents.find((
+      event,
+    ) => (event.data.releaseGroup === deletedReleaseGroup &&
+      event.data.size === deletedSize)
     );
 
     if (correlatedImportEvent && correlatedImportEvent.downloadId) {

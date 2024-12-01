@@ -1,10 +1,9 @@
 import { z } from "zod";
 
-const unsupported = z.object({ action: z.never() });
+const unsupported = z.object({ action: z.literal("_unsupported") });
 
-const radarrOnGrabHooks = z.array(z.discriminatedUnion("action", [z.object({
-  action: z.never(),
-})])).optional();
+const radarrOnGrabHooks = z.array(z.discriminatedUnion("action", [unsupported]))
+  .optional();
 export type RadarrOnGrabHooks = z.infer<typeof radarrOnGrabHooks>;
 
 const radarrOnDownloadHooks = z.array(z.discriminatedUnion(
@@ -35,7 +34,9 @@ export type RadarrOnMovieDeletedHooks = z.infer<
 >;
 
 const radarrOnMovieFileDeletedHooks = z.array(
-  z.discriminatedUnion("action", [unsupported]),
+  z.discriminatedUnion("action", [
+    unsupported,
+  ]),
 ).optional();
 export type RadarrOnMovieFileDeletedHooks = z.infer<
   typeof radarrOnMovieFileDeletedHooks

@@ -29,6 +29,7 @@ type WebhookFn<TPayload> = (
 ) => Promise<void>;
 
 const WebhookFunctions = {
+  "_unsupported": async () => {},
   "tag-outdated-downloads": tagOutdatedDownloads,
 };
 
