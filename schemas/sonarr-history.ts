@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { SonarrReleaseType } from "./sonarr-webhook-common.ts";
+import {z} from "zod";
+import {SonarrReleaseType} from "./sonarr-webhook-common.ts";
 
 const SonarrQualityModel = z.object({
   quality: z.object({
@@ -80,7 +80,7 @@ export const SonarrEpisodeFile = z.object({
   size: z.number().int(),
   dateAdded: z.string(),
   sceneName: z.string().optional(),
-  releaseGroup: z.string().optional(),
+  releaseGroup: z.string().nullish(),
   languages: z.array(SonarrEpisodeLanguage).optional(),
   quality: SonarrQualityModel.optional(),
   customFormats: z.array(SonarrCustomFormatModel).optional(),
@@ -183,7 +183,7 @@ export const SonarrSeriesResource = z.object({
 export const SonarrHistoryData = z.object({
   indexer: z.string().optional(),
   nzbInfoUrl: z.string().optional(),
-  releaseGroup: z.string().optional(),
+  releaseGroup: z.string().nullish(),
   age: z.string().optional(),
   ageHours: z.string().optional(),
   ageMinutes: z.string().optional(),

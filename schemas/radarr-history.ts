@@ -1,8 +1,8 @@
-import { z } from "zod";
+import {z} from "zod";
 
 export const RadarrGrabbedHistoryResponseSchema = z.object({
   indexer: z.string().optional(),
-  releaseGroup: z.string().optional(),
+  releaseGroup: z.string().nullish(),
   age: z.string().optional(),
   ageHours: z.string().optional(),
   ageMinutes: z.string().optional(),
@@ -27,14 +27,14 @@ export const RadarrDownloadFolderImportedHistorySchema = z.object({
   downloadClientName: z.string().optional(),
   droppedPath: z.string(),
   importedPath: z.string(),
-  releaseGroup: z.string().optional(),
+  releaseGroup: z.string().nullish(),
   size: z.string().optional(),
 });
 
 export const RadarrMovieFileDeletedHistorySchema = z.object({
   customFormatScore: z.string().optional(),
   reason: z.enum(["Manual", "MissingFromDisk", "Upgrade"]),
-  releaseGroup: z.string().optional(),
+  releaseGroup: z.string().nullish(),
   size: z.string().optional(),
 });
 

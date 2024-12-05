@@ -99,7 +99,7 @@ export const RadarrRelease = z.object({
   indexer: z.string().optional(),
   size: z.number().int().optional(),
   customFormatScore: z.number().int().optional(),
-  customFormats: z.array(RadarrCustomFormat).optional(),
+  customFormats: z.array(z.string()).optional(),
   indexerFlags: z.array(z.string()).optional(),
 });
 
