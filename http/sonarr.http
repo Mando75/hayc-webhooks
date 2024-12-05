@@ -1,0 +1,5 @@
+### GET request to example server
+GET https://sonarr.bmuller.net/api/v3/history/series?seriesId=319
+Accept: application/json
+X-Api-Key: {{apiKey}}
+###

@@ -1,3 +1,6 @@
+import { QbittorrentTorrent } from "../schemas/qbittorrent.ts";
+import { z } from "zod";
+
 export class QbitApi {
   private readonly host: string;
   private readonly username: string;
@@ -52,6 +55,15 @@ export class QbitApi {
       headers.set("Content-Type", "application/x-www-form-urlencoded");
     }
     return headers;
+  }
+
+  async getTorrents(hashes?: Array<string>) {
+    const hashString = hashes ? hashes.join("|") : "";
+    const query = new URLSearchParams({ hashes: hashString });
+    const req = new Request(this.host + `/api/v2/torrents/info?${query}`);
+
+    const result = await this.exec(req);
+    return z.array(QbittorrentTorrent).parse(await result.json());
   }
 
   async addTags(hashes: Array<string>, tags: Array<string>) {

@@ -1,5 +1,5 @@
 import { Config } from "../schemas/config.ts";
-import { tagOutdatedDownloads } from "./radarr/on-download/tag-outdated-downloads.ts";
+import { tagOutdatedDownloads } from "./radarr/on-download/tag-outdated-downloads.radarr.ts";
 import { RadarrApi } from "../clients/radarr.api.ts";
 import { QbitApi } from "../clients/qbit.api.ts";
 import {
@@ -16,8 +16,9 @@ import {
   RadarrOnTestPayload,
   RadarrWebhookPayload,
 } from "../schemas/radarr-webhook-payload.ts";
+import { runWebhooks } from "../util/run-webhooks.ts";
 
-export type WebhookContext = {
+export type RadarrWebhookContext = {
   config: Config;
   radarrApi: RadarrApi;
   qbitApi: QbitApi;
@@ -25,11 +26,11 @@ export type WebhookContext = {
 
 type WebhookFn<TPayload> = (
   payload: TPayload,
-  context: WebhookContext,
+  context: RadarrWebhookContext,
 ) => Promise<void>;
 
 const WebhookFunctions = {
-  "_unsupported": async () => {},
+  "_unsupported": (_hook: unknown) => (): Promise<void> => Promise.resolve(),
   "tag-outdated-downloads": tagOutdatedDownloads,
 };
 
@@ -73,45 +74,53 @@ export class RadarrWebhook {
     this.config = config;
     const { webhooks } = config.radarr;
     this.onGrab =
-      webhooks.onGrab?.map((hook) => WebhookFunctions[hook.action]) ?? [];
+      webhooks.onGrab?.map((hook) => WebhookFunctions[hook.action](hook)) ?? [];
     this.onDownload =
       webhooks.onDownload?.map((hook) => WebhookFunctions[hook.action](hook)) ??
         [];
     this.onRename =
-      webhooks.onRename?.map((hook) => WebhookFunctions[hook.action]) ??
+      webhooks.onRename?.map((hook) => WebhookFunctions[hook.action](hook)) ??
         [];
     this.onMovieAdded =
-      webhooks.onMovieAdded?.map((hook) => WebhookFunctions[hook.action]) ?? [];
+      webhooks.onMovieAdded?.map((hook) =>
+        WebhookFunctions[hook.action](hook)
+      ) ?? [];
     this.onMovieFileDelete =
       webhooks.onMovieFileDeleted?.map((hook) =>
-        WebhookFunctions[hook.action]
+        WebhookFunctions[hook.action](hook)
       ) ?? [];
     this.onMovieDelete =
-      webhooks.onMovieDeleted?.map((hook) => WebhookFunctions[hook.action]) ??
+      webhooks.onMovieDeleted?.map((hook) =>
+        WebhookFunctions[hook.action](hook)
+      ) ??
         [];
     this.onHealthIssue =
-      webhooks.onHealthIssue?.map((hook) => WebhookFunctions[hook.action]) ??
+      webhooks.onHealthIssue?.map((hook) =>
+        WebhookFunctions[hook.action](hook)
+      ) ??
         [];
     this.onHealthIssueRestored =
-      webhooks.onHealthRestored?.map((hook) => WebhookFunctions[hook.action]) ??
+      webhooks.onHealthRestored?.map((hook) =>
+        WebhookFunctions[hook.action](hook)
+      ) ??
         [];
     this.onApplicationUpdate =
       webhooks.onApplicationUpdate?.map((hook) =>
-        WebhookFunctions[hook.action]
+        WebhookFunctions[hook.action](hook)
       ) ?? [];
     this.onManualInteractionRequired =
       webhooks.onManualInteractionRequired?.map((hook) =>
-        WebhookFunctions[hook.action]
+        WebhookFunctions[hook.action](hook)
       ) ?? [];
     this.onTest =
-      webhooks.onTest?.map((hook) => WebhookFunctions[hook.action]) ?? [];
+      webhooks.onTest?.map((hook) => WebhookFunctions[hook.action](hook)) ?? [];
   }
 
   public async processWebhook(webhookPayload: unknown) {
     const parsingResult = RadarrWebhookPayload.safeParse(webhookPayload);
     const radarrApi = this.getRadarrApi();
-    const qbitApi = await this.getQbitApi();
-    const context: WebhookContext = {
+    const qbitApi = this.getQbitApi();
+    const context: RadarrWebhookContext = {
       config: this.config,
       radarrApi,
       qbitApi,
@@ -122,47 +131,47 @@ export class RadarrWebhook {
       console.log("Received Radarr webhook event:", data.eventType);
       switch (data.eventType) {
         case "Grab":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onGrab.map((fn) => fn(data, context)),
           );
         case "Download":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onDownload.map((fn) => fn(data, context)),
           );
         case "Rename":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onRename.map((fn) => fn(data, context)),
           );
         case "MovieAdded":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onMovieAdded.map((fn) => fn(data, context)),
           );
         case "MovieFileDelete":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onMovieFileDelete.map((fn) => fn(data, context)),
           );
         case "MovieDelete":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onMovieDelete.map((fn) => fn(data, context)),
           );
         case "Health":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onHealthIssue.map((fn) => fn(data, context)),
           );
         case "HealthRestored":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onHealthIssueRestored.map((fn) => fn(data, context)),
           );
         case "ApplicationUpdate":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onApplicationUpdate.map((fn) => fn(data, context)),
           );
         case "ManualInteractionRequired":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onManualInteractionRequired.map((fn) => fn(data, context)),
           );
         case "Test":
-          return await this.runWebhooks(
+          return await runWebhooks(
             this.onTest.map((fn) => fn(data, context)),
           );
         default:
@@ -170,7 +179,7 @@ export class RadarrWebhook {
       }
     } else {
       console.error("Failed to parse Radarr webhook payload:");
-      console.error(parsingResult.error);
+      console.error(JSON.stringify(parsingResult.error, null, 2));
     }
   }
 
@@ -184,19 +193,5 @@ export class RadarrWebhook {
       this.config.qbit.user,
       this.config.qbit.pwd,
     );
-  }
-
-  private async runWebhooks(webhooks: Array<Promise<void>>) {
-    if (webhooks.length === 0) {
-      console.log("No webhooks registered for this event");
-      return;
-    }
-    console.log(`Running ${webhooks.length} webhook handlers`);
-    const result = await Promise.allSettled(webhooks);
-    const rejected = result.filter((r) => r.status === "rejected");
-    if (rejected.length > 0) {
-      console.error(`ERROR: Webhook ${rejected.length} handlers failed:`);
-      console.error(rejected);
-    }
   }
 }

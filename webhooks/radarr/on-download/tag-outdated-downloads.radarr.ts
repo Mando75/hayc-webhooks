@@ -1,8 +1,8 @@
 import { RadarrApi } from "../../../clients/radarr.api.ts";
-import { QbitApi } from "../../../clients/qbit.api.ts";
-import { WebhookContext } from "../../RadarrWebhook.ts";
+import { RadarrWebhookContext } from "../../RadarrWebhook.ts";
 import { RadarrOnDownloadPayload } from "../../../schemas/radarr-webhook-payload.ts";
-import { RadarrOnDownloadHooks } from "../../../schemas/config.ts";
+import { RadarrOnDownloadHooks } from "../../../config/radarr.hooks.ts";
+import { tagDownloads } from "../../common/on-download/tag-outdated-downloads.common.ts";
 
 type TagOutdatedDownloadsConfig =
   NonNullable<RadarrOnDownloadHooks>[number]["action"] extends
@@ -19,7 +19,7 @@ type TagOutdatedDownloadsConfig =
 export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
   return async (
     webhook: RadarrOnDownloadPayload,
-    context: WebhookContext,
+    context: RadarrWebhookContext,
   ): Promise<void> => {
     console.log(`Received upgrade for ${webhook.movie.id}`);
     const deletedDownloadHashes = await getDeletedDownloadHashes(
@@ -29,7 +29,7 @@ export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
     await tagDownloads(
       context.qbitApi,
       deletedDownloadHashes,
-      [config.tag],
+      config.tag,
     );
   };
 }
@@ -82,27 +82,4 @@ async function getDeletedDownloadHashes(
   }
 
   return deletedDownloadHashes;
-}
-
-/**
- * Tags the downloads with the configured upgrade tag
- * @param qbit
- * @param downloadHashes
- * @param tags
- */
-async function tagDownloads(
-  qbit: QbitApi,
-  downloadHashes: string[],
-  tags: string[],
-): Promise<void> {
-  if (downloadHashes.length === 0) {
-    console.log("No obsolete downloads found");
-    return;
-  }
-
-  console.log("Found the following obsolete downloads:", downloadHashes);
-  console.log("Adding tag radarr-upgraded to obsolete downloads");
-
-  await qbit.addTags(downloadHashes, tags);
-  console.log("Tagging completed");
 }

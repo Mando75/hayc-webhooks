@@ -1,7 +1,7 @@
+import { SonarrHistoryResource } from "../schemas/sonarr-history.ts";
 import { z } from "zod";
-import { RadarrHistorySchema } from "../schemas/radarr-history.ts";
 
-export class RadarrApi {
+export class SonarrApi {
   private readonly apiKey: string;
   private readonly host: string;
 
@@ -17,7 +17,7 @@ export class RadarrApi {
       if (res.ok) {
         return res.json();
       }
-      throw new Error(`Failed to execute request to Radarr: ${res.statusText}`);
+      throw new Error(`Failed to execute request to Sonarr: ${res.statusText}`);
     });
   }
 
@@ -30,16 +30,26 @@ export class RadarrApi {
     return headers;
   }
 
-  async getMovieHistory(movieId: number) {
-    const searchParams = new URLSearchParams({ movieId: String(movieId) });
+  public async getSeriesHistory(
+    seriesId: number,
+    seasonNumber?: number,
+    eventType?: SonarrHistoryResource["eventType"],
+  ) {
+    const searchParams = new URLSearchParams({
+      seriesId: seriesId.toString(),
+      includeSeries: "true",
+      includeEpisode: "true",
+    });
+    if (seasonNumber) searchParams.set("seasonNumber", seasonNumber.toString());
+    if (eventType) searchParams.set("eventType", eventType);
+
     const req = new Request(
-      this.host + `/api/v3/history/movie?${searchParams}`,
+      this.host + `/api/v3/history/series?${searchParams}`,
       {
         method: "GET",
       },
     );
     const res = await this.exec(req);
-
-    return z.array(RadarrHistorySchema).parseAsync(res);
+    return await z.array(SonarrHistoryResource).parseAsync(res);
   }
 }

@@ -11,3 +11,153 @@ POST http://127.0.0.1:8000/webhooks/radarr
 Content-Type: application/json
 
 {"movie":{"id":147,"title":"Quantum of Solace","year":2008,"releaseDate":"2009-03-24","folderPath":"/data/Movies/Quantum of Solace (2008) {imdb-tt0830515}","tmdbId":10764,"imdbId":"tt0830515","overview":"Betrayed by Vesper, the woman he loved, 007 fights the urge to make his latest mission personal. Pursuing his determination to uncover the truth, Bond and M interrogate Mr. White, who reveals that the organization that blackmailed Vesper is far more complex and dangerous than anyone had imagined.","genres":["Adventure","Action","Thriller"],"images":[],"tags":[]},"remoteMovie":{"tmdbId":10764,"imdbId":"tt0830515","title":"Quantum of Solace","year":2008},"movieFile":{"id":3355,"relativePath":"Quantum of Solace (2008) {imdb-tt0830515} [Bluray-1080p][DV HDR10][AC3 5.1][x265]-Chivaman.mkv","path":"/data/Movies/Quantum of Solace (2008) {imdb-tt0830515}/Quantum of Solace (2008) {imdb-tt0830515} [Bluray-1080p][DV HDR10][AC3 5.1][x265]-Chivaman.mkv","quality":"Bluray-1080p","qualityVersion":1,"releaseGroup":"Chivaman","sceneName":"Quantum of Solace 2008 1080p BluRay DV HDR X265 DD 5 1-Chivaman","indexerFlags":"0","size":4690298654,"dateAdded":"2024-11-26T02:19:25.2085357Z","mediaInfo":{"audioChannels":5.1,"audioCodec":"AC3","audioLanguages":[],"height":800,"width":1920,"subtitles":[],"videoCodec":"x265","videoDynamicRange":"HDR","videoDynamicRangeType":"DV HDR10"},"sourcePath":"/data/Staging/radarr/Quantum of Solace 2008 1080p BluRay DV HDR X265 DD 5 1-Chivaman/Quantum of Solace 2008 1080p BluRay DV HDR X265 DD 5 1-Chivaman.mkv"},"isUpgrade":true,"downloadClient":"qBittorrent","downloadClientType":"qBittorrent","downloadId":"8164A86B2BCE2BD4AB602133F49335E9F0B0C8FE","deletedFiles":[{"id":2990,"relativePath":"Quantum of Solace (2008) {tmdb-10764} [Bluray-1080p][HDR10][DTS-HD MA 5.1][HEVC]-d3g.mkv","path":"/data/Movies/Quantum of Solace (2008) {imdb-tt0830515}/Quantum of Solace (2008) {tmdb-10764} [Bluray-1080p][HDR10][DTS-HD MA 5.1][HEVC]-d3g.mkv","quality":"Bluray-1080p","qualityVersion":1,"releaseGroup":"d3g","indexerFlags":"0","size":12281579917,"dateAdded":"2024-09-28T01:38:43.4404134Z","mediaInfo":{"audioChannels":5.1,"audioCodec":"DTS","audioLanguages":["en"],"height":1080,"width":1920,"subtitles":[],"videoCodec":"AVC","videoDynamicRange":"","videoDynamicRangeType":"HDR"},"recycleBinPath":"/data/.RecycleBin/radarr/Quantum of Solace (2008) {imdb-tt0830515}/Quantum of Solace (2008) {tmdb-10764} [Bluray-1080p][HDR10][DTS-HD MA 5.1][HEVC]-d3g.mkv"}],"customFormatInfo":{"customFormats":[],"customFormatScore":0},"release":{"releaseTitle":"Quantum of Solace 2008 1080p BluRay DV HDR X265 DD 5 1-Chivaman","indexer":"IPTorrents (Prowlarr)","size":4370000000},"eventType":"Download","instanceName":"Radarr","applicationUrl":""}
+
+
+### Testing with actual payload sonarr
+POST http://127.0.0.1:8000/webhooks/sonarr
+Content-Type: application/json
+
+{
+  "series": {
+    "id": 288,
+    "title": "Tying the Knot with an Amagami Sister",
+    "titleSlug": "tying-the-knot-with-an-amagami-sister",
+    "path": "/data/Anime/Tying the Knot With an Amagami Sister (2024) {tvdb-432632}",
+    "tvdbId": 432632,
+    "tvMazeId": 76697,
+    "tmdbId": 234910,
+    "imdbId": "tt29141921",
+    "type": "anime",
+    "year": 2024,
+    "genres": [
+      "Animation",
+      "Anime",
+      "Comedy",
+      "Romance"
+    ],
+    "images": [
+      {
+        "coverType": "banner",
+        "url": "/MediaCover/288/banner.jpg?lastWrite=638634641290937630",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/432632/banners/66fc97c460d8a.jpg"
+      },
+      {
+        "coverType": "poster",
+        "url": "/MediaCover/288/poster.jpg?lastWrite=638634208686875651",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/432632/posters/66fc1978d7a57.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "url": "/MediaCover/288/fanart.jpg?lastWrite=638634208687315661",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/432632/backgrounds/66fc19606b27f.jpg"
+      },
+      {
+        "coverType": "clearlogo",
+        "url": "/MediaCover/288/clearlogo.png?lastWrite=638622939711182624",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/432632/clearlogo/64445cb37ee0e.png"
+      }
+    ],
+    "tags": []
+  },
+  "episodes": [
+    {
+      "id": 19856,
+      "episodeNumber": 7,
+      "seasonNumber": 1,
+      "title": "Dream and Moon and Dream ~New Moon~",
+      "overview": "The sisters seek help from the priestess who trained them, but are met with an unexpected demand.",
+      "airDate": "2024-11-13",
+      "airDateUtc": "2024-11-12T15:00:00Z",
+      "seriesId": 288,
+      "tvdbId": 10543565
+    }
+  ],
+  "episodeFile": {
+    "id": 80501,
+    "relativePath": "Season 01/Tying the Knot with an Amagami Sister (2024) - S01E07 - 007 - Dream and Moon and Dream ~New Moon~ [CR WEBDL-1080p][8bit][x264][AAC 2.0][JA+EN]-VARYG.mkv",
+    "path": "/data/Anime/Tying the Knot With an Amagami Sister (2024) {tvdb-432632}/Season 01/Tying the Knot with an Amagami Sister (2024) - S01E07 - 007 - Dream and Moon and Dream ~New Moon~ [CR WEBDL-1080p][8bit][x264][AAC 2.0][JA+EN]-VARYG.mkv",
+    "quality": "WEBDL-1080p",
+    "qualityVersion": 1,
+    "releaseGroup": "VARYG",
+    "size": 1470189767,
+    "dateAdded": "2024-11-26T21:36:36.1820878Z",
+    "mediaInfo": {
+      "audioChannels": 2,
+      "audioCodec": "AAC",
+      "audioLanguages": [
+        "jpn",
+        "eng"
+      ],
+      "height": 1080,
+      "width": 1920,
+      "subtitles": [
+        "eng",
+        "ara",
+        "ger",
+        "spa",
+        "fre",
+        "ita",
+        "por",
+        "rus"
+      ],
+      "videoCodec": "x264",
+      "videoDynamicRange": "",
+      "videoDynamicRangeType": ""
+    }
+  },
+  "isUpgrade": true,
+  "downloadClient": "qbit",
+  "downloadClientType": "qBittorrent",
+  "downloadId": "C1F114B4152F2E9A1A3FA81C45BD56FD9CA61607",
+  "deletedFiles": [
+    {
+      "id": 80051,
+      "relativePath": "Season 01/Tying the Knot with an Amagami Sister (2024) - S01E07 - 007 - Dream and Moon and Dream ~New Moon~ [HDTV-1080p][8bit][x264][AAC 2.0][JA]-SubsPlease.mkv",
+      "path": "/data/Anime/Tying the Knot With an Amagami Sister (2024) {tvdb-432632}/Season 01/Tying the Knot with an Amagami Sister (2024) - S01E07 - 007 - Dream and Moon and Dream ~New Moon~ [HDTV-1080p][8bit][x264][AAC 2.0][JA]-SubsPlease.mkv",
+      "quality": "HDTV-1080p",
+      "qualityVersion": 1,
+      "releaseGroup": "SubsPlease",
+      "sceneName": "[SubsPlease] Amagami-san Chi no Enmusubi - 07 (1080p) [B694BDD2]",
+      "size": 1448586514,
+      "dateAdded": "2024-11-13T02:33:00.3091853Z",
+      "mediaInfo": {
+        "audioChannels": 2,
+        "audioCodec": "AAC",
+        "audioLanguages": [
+          "jpn"
+        ],
+        "height": 1080,
+        "width": 1920,
+        "subtitles": [
+          "eng"
+        ],
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": ""
+      },
+      "recycleBinPath": "/data/.RecycleBin/sonarr/Tying the Knot With an Amagami Sister (2024) {tvdb-432632}/Season 01/Tying the Knot with an Amagami Sister (2024) - S01E07 - 007 - Dream and Moon and Dream ~New Moon~ [HDTV-1080p][8bit][x264][AAC 2.0][JA]-SubsPlease.mkv"
+    }
+  ],
+  "customFormatInfo": {
+    "customFormats": [
+      {
+        "id": 315,
+        "name": "Anime Web Tier 04 (Official Subs)"
+      },
+      {
+        "id": 328,
+        "name": "CR"
+      }
+    ],
+    "customFormatScore": 306
+  },
+  "release": {
+    "releaseTitle": "Tying the Knot with an Amagami Sister S01E07 Dream and Moon and Dream New Moon 1080p CR WEB-DL AAC2.0 H 264 DUAL-VARYG (Amagami-san Chi no Enmusubi, Dual-Audio, Multi-Subs)",
+    "indexer": "Nyaa.si (Prowlarr)",
+    "size": 1503238553,
+    "releaseType": "singleEpisode"
+  },
+  "eventType": "Download",
+  "instanceName": "Sonarr",
+  "applicationUrl": ""
+}

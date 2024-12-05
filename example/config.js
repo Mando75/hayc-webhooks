@@ -9,6 +9,16 @@ export default {
       }],
     },
   },
+  sonarr: {
+    host: "http://localhost:8989",
+    apiKey: "<your api key>",
+    webhooks: {
+      onDownload: [{
+        action: "tag-outdated-downloads",
+        tag: "sonarr-upgraded",
+      }],
+    },
+  },
   qbit: {
     host: "http://localhost:8080",
     user: "your-username",

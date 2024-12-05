@@ -44,8 +44,8 @@ export const RadarrGrabbedRelease = z.object({
 });
 
 export const RadarrImage = z.object({
-  url: z.string().url().optional(),
-  remoteUrl: z.string().url().optional(),
+  url: z.string().optional(),
+  remoteUrl: z.string().optional(),
 });
 
 export const RadarrMovie = z.object({
@@ -178,11 +178,11 @@ export const RadarrMovieFileDeletePayload = z.object({
   movie: RadarrMovie,
   movieFile: RadarrMovieFile,
   deleteReason: z.enum([
-    "MissingFromDisk",
-    "Manual",
-    "Upgrade",
-    "NoLinkedEpisodes",
-    "ManualOverride",
+    "missingFromDisk",
+    "manual",
+    "upgrade",
+    "noLinkedEpisodes",
+    "manualOverride",
   ]),
 });
 

@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const GrabbedHistoryDataSchema = z.object({
+export const RadarrGrabbedHistoryResponseSchema = z.object({
   indexer: z.string().optional(),
   releaseGroup: z.string().optional(),
   age: z.string().optional(),
@@ -16,11 +16,11 @@ export const GrabbedHistoryDataSchema = z.object({
   imdbId: z.string().optional(),
 });
 
-export const DownloadFailedHistorySchema = z.object({
+export const RadarrDownloadFailedHistorySchema = z.object({
   message: z.string(),
 });
 
-export const DownloadFolderImportedHistorySchema = z.object({
+export const RadarrDownloadFolderImportedHistorySchema = z.object({
   fileId: z.string().optional(),
   customFormatScore: z.string().optional(),
   downloadClient: z.string().optional(),
@@ -31,21 +31,21 @@ export const DownloadFolderImportedHistorySchema = z.object({
   size: z.string().optional(),
 });
 
-export const MovieFileDeletedHistorySchema = z.object({
+export const RadarrMovieFileDeletedHistorySchema = z.object({
   customFormatScore: z.string().optional(),
   reason: z.enum(["Manual", "MissingFromDisk", "Upgrade"]),
   releaseGroup: z.string().optional(),
   size: z.string().optional(),
 });
 
-export const MovieFileRenamedHistorySchema = z.object({
+export const RadarrMovieFileRenamedHistorySchema = z.object({
   sourcePath: z.string(),
   sourceRelativePath: z.string(),
   path: z.string(),
   relativePath: z.string(),
 });
 
-export const DownloadIgnoredHistorySchema = z.object({
+export const RadarrDownloadIgnoredHistorySchema = z.object({
   message: z.string(),
 });
 
@@ -62,23 +62,23 @@ const historyBase = z.object({
 export const RadarrHistorySchema = z.discriminatedUnion("eventType", [
   z.object({
     eventType: z.literal("grabbed"),
-    data: GrabbedHistoryDataSchema,
+    data: RadarrGrabbedHistoryResponseSchema,
   }).merge(historyBase),
   z.object({
     eventType: z.literal("downloadFolderImported"),
-    data: DownloadFolderImportedHistorySchema,
+    data: RadarrDownloadFolderImportedHistorySchema,
   }).merge(historyBase),
   z.object({
     eventType: z.literal("movieFileDeleted"),
-    data: MovieFileDeletedHistorySchema,
+    data: RadarrMovieFileDeletedHistorySchema,
   }).merge(historyBase),
   z.object({
     eventType: z.literal("movieFileRenamed"),
-    data: MovieFileRenamedHistorySchema,
+    data: RadarrMovieFileRenamedHistorySchema,
   }).merge(historyBase),
   z.object({
     eventType: z.literal("downloadIgnored"),
-    data: DownloadIgnoredHistorySchema,
+    data: RadarrDownloadIgnoredHistorySchema,
   }).merge(historyBase),
 ]);
 
