@@ -1,4 +1,4 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export const RadarrGrabbedHistoryResponseSchema = z.object({
   indexer: z.string().optional(),

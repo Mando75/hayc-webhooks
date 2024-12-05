@@ -24,7 +24,6 @@ export async function tagDownloads(
       tags: t.tags,
     }),
   );
-  downloadsInQbit.forEach((t) => console.log(t.tags.includes(tag)));
   if (downloadsInQbit.length === 0) {
     console.log("No obsolete un-tagged downloads found in qbit");
     return;
