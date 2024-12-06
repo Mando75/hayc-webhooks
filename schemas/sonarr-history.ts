@@ -182,7 +182,7 @@ export const SonarrSeriesResource = z.object({
 
 export const SonarrHistoryData = z.object({
   indexer: z.string().optional(),
-  nzbInfoUrl: z.string().optional(),
+  nzbInfoUrl: z.string().nullish(),
   releaseGroup: z.string().nullish(),
   age: z.string().optional(),
   ageHours: z.string().optional(),
