@@ -1,4 +1,4 @@
-import { z } from "zod";
+import {z} from "zod";
 
 export const RadarrGrabbedHistoryResponseSchema = z.object({
   indexer: z.string().optional(),
@@ -7,8 +7,8 @@ export const RadarrGrabbedHistoryResponseSchema = z.object({
   ageHours: z.string().optional(),
   ageMinutes: z.string().optional(),
   publishedDate: z.string().optional(),
-  downloadClient: z.string().optional(),
-  downloadClientName: z.string().optional(),
+  downloadClient: z.string().nullish(),
+  downloadClientName: z.string().nullish(),
   size: z.string().optional(),
   downloadUrl: z.string().optional(),
   guid: z.string().optional(),
