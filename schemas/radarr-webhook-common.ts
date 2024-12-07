@@ -1,26 +1,26 @@
-import { z } from "zod";
+import {z} from "zod";
 
 export const RadarrCustomFormat = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
+  id: z.number().int().nullish(),
+  name: z.string().nullish(),
 });
 
 export const RadarrCustomFormatInfo = z.object({
-  customFormats: z.array(RadarrCustomFormat).optional(),
-  customFormatScore: z.number().int().optional(),
+  customFormats: z.array(RadarrCustomFormat).nullish(),
+  customFormatScore: z.number().int().nullish(),
 });
 
 export const RadarrDownloadClientItem = z.object({
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  title: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  title: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
 });
 
 export const RadarrDownloadStatusMessage = z.object({
-  title: z.string().optional(),
-  messages: z.array(z.string()).optional(),
+  title: z.string().nullish(),
+  messages: z.array(z.string()).nullish(),
 });
 
 export const RadarrEventType = z.enum([
@@ -38,92 +38,92 @@ export const RadarrEventType = z.enum([
 ]);
 
 export const RadarrGrabbedRelease = z.object({
-  releaseTitle: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
+  releaseTitle: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
 });
 
 export const RadarrImage = z.object({
-  url: z.string().optional(),
-  remoteUrl: z.string().optional(),
+  url: z.string().nullish(),
+  remoteUrl: z.string().nullish(),
 });
 
 export const RadarrMovie = z.object({
   id: z.number().int(),
   title: z.string(),
-  year: z.number().int().optional(),
-  filePath: z.string().optional(),
-  releaseDate: z.string().date().optional(),
-  folderPath: z.string().optional(),
-  tmdbId: z.number().int().optional(),
-  imdbId: z.string().optional(),
-  overview: z.string().optional(),
-  genres: z.array(z.string()).optional(),
-  images: z.array(RadarrImage).optional(),
-  tags: z.array(z.string()).optional(),
+  year: z.number().int().nullish(),
+  filePath: z.string().nullish(),
+  releaseDate: z.string().date().nullish(),
+  folderPath: z.string().nullish(),
+  tmdbId: z.number().int().nullish(),
+  imdbId: z.string().nullish(),
+  overview: z.string().nullish(),
+  genres: z.array(z.string()).nullish(),
+  images: z.array(RadarrImage).nullish(),
+  tags: z.array(z.string()).nullish(),
 });
 
 export const RadarrMovieFileMediaInfo = z.object({
-  audioChannels: z.number().optional(),
-  audioCodec: z.string().optional(),
-  audioLanguages: z.array(z.string()).optional(),
-  height: z.number().int().optional(),
-  width: z.number().int().optional(),
-  subtitles: z.array(z.string()).optional(),
-  videoCodec: z.string().optional(),
-  videoDynamicRange: z.string().optional(),
-  videoDynamicRangeType: z.string().optional(),
+  audioChannels: z.number().nullish(),
+  audioCodec: z.string().nullish(),
+  audioLanguages: z.array(z.string()).nullish(),
+  height: z.number().int().nullish(),
+  width: z.number().int().nullish(),
+  subtitles: z.array(z.string()).nullish(),
+  videoCodec: z.string().nullish(),
+  videoDynamicRange: z.string().nullish(),
+  videoDynamicRangeType: z.string().nullish(),
 });
 
 export const RadarrMovieFile = z.object({
   id: z.number().int(),
-  relativePath: z.string().optional(),
-  path: z.string().optional(),
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  releaseGroup: z.string().optional(),
-  sceneName: z.string().optional().optional(),
-  indexerFlags: z.string().optional(),
-  size: z.number().int().optional(),
-  dateAdded: z.string().datetime().optional(),
-  mediaInfo: RadarrMovieFileMediaInfo.optional(),
-  sourcePath: z.string().optional(),
-  recycleBinPath: z.string().optional(),
+  relativePath: z.string().nullish(),
+  path: z.string().nullish(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  releaseGroup: z.string().nullish(),
+  sceneName: z.string().nullish().nullish(),
+  indexerFlags: z.string().nullish(),
+  size: z.number().int().nullish(),
+  dateAdded: z.string().datetime().nullish(),
+  mediaInfo: RadarrMovieFileMediaInfo.nullish(),
+  sourcePath: z.string().nullish(),
+  recycleBinPath: z.string().nullish(),
 });
 
 export const RadarrRelease = z.object({
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  releaseGroup: z.string().optional(),
-  releaseTitle: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
-  customFormatScore: z.number().int().optional(),
-  customFormats: z.array(z.string()).optional(),
-  indexerFlags: z.array(z.string()).optional(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  releaseGroup: z.string().nullish(),
+  releaseTitle: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
+  customFormatScore: z.number().int().nullish(),
+  customFormats: z.array(z.string()).nullish(),
+  indexerFlags: z.array(z.string()).nullish(),
 });
 
 export const RadarrRemoteMovie = z.object({
-  tmdbid: z.number().int().optional(),
-  imdbid: z.string().optional(),
-  title: z.string().optional(),
-  year: z.number().int().optional(),
+  tmdbid: z.number().int().nullish(),
+  imdbid: z.string().nullish(),
+  title: z.string().nullish(),
+  year: z.number().int().nullish(),
 });
 
 export const RadarrRenamedMovieFile = z.object({
-  previousPath: z.string().optional(),
-  previousRelativePath: z.string().optional(),
+  previousPath: z.string().nullish(),
+  previousRelativePath: z.string().nullish(),
 });
 
 export const RadarrAddedPayload = z.object({
-  movie: RadarrMovie.optional(),
-  addMethod: z.enum(["Manual", "List", "Collection"]).optional(),
+  movie: RadarrMovie.nullish(),
+  addMethod: z.enum(["Manual", "List", "Collection"]).nullish(),
 });
 
 export const RadarrApplicationUpdatePayload = z.object({
-  message: z.string().optional(),
-  previousVersion: z.string().optional(),
-  newVersion: z.string().optional(),
+  message: z.string().nullish(),
+  previousVersion: z.string().nullish(),
+  newVersion: z.string().nullish(),
 });
 
 export const RadarrGrabPayload = z.object({
@@ -148,30 +148,30 @@ export const RadarrImportPayload = z.object({
   remoteMovie: RadarrRemoteMovie,
   movieFile: RadarrMovieFile,
   isUpgrade: z.boolean(),
-  downloadClient: z.string().optional(),
-  downloadClientType: z.string().optional(),
-  downloadId: z.string().optional(),
-  deletedFiles: z.array(RadarrMovieFile).optional(),
-  customFormatInfo: RadarrCustomFormatInfo.optional(),
-  release: RadarrGrabbedRelease.optional(),
+  downloadClient: z.string().nullish(),
+  downloadClientType: z.string().nullish(),
+  downloadId: z.string().nullish(),
+  deletedFiles: z.array(RadarrMovieFile).nullish(),
+  customFormatInfo: RadarrCustomFormatInfo.nullish(),
+  release: RadarrGrabbedRelease.nullish(),
 });
 
 export const RadarrManualInteractionPayload = z.object({
   movie: RadarrMovie,
   downloadInfo: RadarrDownloadClientItem,
-  downloadClient: z.string().optional(),
-  downloadClientType: z.string().optional(),
-  downloadId: z.string().optional(),
-  downloadStatus: z.string().optional(),
-  downloadStatusMessages: z.array(RadarrDownloadStatusMessage).optional(),
-  customFormatInfo: RadarrCustomFormatInfo.optional(),
-  release: RadarrGrabbedRelease.optional(),
+  downloadClient: z.string().nullish(),
+  downloadClientType: z.string().nullish(),
+  downloadId: z.string().nullish(),
+  downloadStatus: z.string().nullish(),
+  downloadStatusMessages: z.array(RadarrDownloadStatusMessage).nullish(),
+  customFormatInfo: RadarrCustomFormatInfo.nullish(),
+  release: RadarrGrabbedRelease.nullish(),
 });
 
 export const RadarrMovieDeletePayload = z.object({
   movie: RadarrMovie,
-  deletedFiles: z.boolean().optional(),
-  movieFolderSize: z.number().int().optional(),
+  deletedFiles: z.boolean().nullish(),
+  movieFolderSize: z.number().int().nullish(),
 });
 
 export const RadarrMovieFileDeletePayload = z.object({

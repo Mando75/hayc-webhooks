@@ -1,19 +1,19 @@
 import {z} from "zod";
 
 export const RadarrGrabbedHistoryResponseSchema = z.object({
-  indexer: z.string().optional(),
+  indexer: z.string().nullish(),
   releaseGroup: z.string().nullish(),
-  age: z.string().optional(),
-  ageHours: z.string().optional(),
-  ageMinutes: z.string().optional(),
-  publishedDate: z.string().optional(),
+  age: z.string().nullish(),
+  ageHours: z.string().nullish(),
+  ageMinutes: z.string().nullish(),
+  publishedDate: z.string().nullish(),
   downloadClient: z.string().nullish(),
   downloadClientName: z.string().nullish(),
-  size: z.string().optional(),
-  downloadUrl: z.string().optional(),
-  guid: z.string().optional(),
-  tmdbId: z.string().optional(),
-  imdbId: z.string().optional(),
+  size: z.string().nullish(),
+  downloadUrl: z.string().nullish(),
+  guid: z.string().nullish(),
+  tmdbId: z.string().nullish(),
+  imdbId: z.string().nullish(),
 });
 
 export const RadarrDownloadFailedHistorySchema = z.object({
@@ -21,21 +21,21 @@ export const RadarrDownloadFailedHistorySchema = z.object({
 });
 
 export const RadarrDownloadFolderImportedHistorySchema = z.object({
-  fileId: z.string().optional(),
-  customFormatScore: z.string().optional(),
-  downloadClient: z.string().optional(),
-  downloadClientName: z.string().optional(),
+  fileId: z.string().nullish(),
+  customFormatScore: z.string().nullish(),
+  downloadClient: z.string().nullish(),
+  downloadClientName: z.string().nullish(),
   droppedPath: z.string(),
   importedPath: z.string(),
   releaseGroup: z.string().nullish(),
-  size: z.string().optional(),
+  size: z.string().nullish(),
 });
 
 export const RadarrMovieFileDeletedHistorySchema = z.object({
-  customFormatScore: z.string().optional(),
+  customFormatScore: z.string().nullish(),
   reason: z.enum(["Manual", "MissingFromDisk", "Upgrade"]),
   releaseGroup: z.string().nullish(),
-  size: z.string().optional(),
+  size: z.string().nullish(),
 });
 
 export const RadarrMovieFileRenamedHistorySchema = z.object({
@@ -51,11 +51,11 @@ export const RadarrDownloadIgnoredHistorySchema = z.object({
 
 const historyBase = z.object({
   movieId: z.number(),
-  sourceTitle: z.string().optional(),
-  customFormatScore: z.number().optional(),
-  qualityCutOffNotMet: z.boolean().optional(),
-  date: z.string().optional(),
-  downloadId: z.string().optional(),
+  sourceTitle: z.string().nullish(),
+  customFormatScore: z.number().nullish(),
+  qualityCutOffNotMet: z.boolean().nullish(),
+  date: z.string().nullish(),
+  downloadId: z.string().nullish(),
   id: z.number(),
 });
 

@@ -1,65 +1,65 @@
-import { z } from "zod";
+import {z} from "zod";
 
 export const SonarrCustomFormat = z.object({
-  id: z.number().int().optional(),
-  name: z.string().optional(),
+  id: z.number().int().nullish(),
+  name: z.string().nullish(),
 });
 
 export const SonarrCustomFormatInfo = z.object({
-  customFormats: z.array(SonarrCustomFormat).optional(),
-  customFormatScore: z.number().int().optional(),
+  customFormats: z.array(SonarrCustomFormat).nullish(),
+  customFormatScore: z.number().int().nullish(),
 });
 
 export const SonarrWebhookDownloadClientItem = z.object({
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  title: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  title: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
 });
 
 export const SonarrDownloadStatusMessage = z.object({
-  title: z.string().optional(),
-  messages: z.array(z.string()).optional(),
+  title: z.string().nullish(),
+  messages: z.array(z.string()).nullish(),
 });
 
 export const SonarrEpisode = z.object({
   id: z.number().int(),
-  episodeNumber: z.number().int().optional(),
-  seasonNumber: z.number().int().optional(),
-  title: z.string().optional(),
-  overview: z.string().optional(),
-  airDate: z.string().date().optional(),
-  airDateUtc: z.string().datetime().optional(),
-  seriesId: z.number().int().optional(),
-  tvdbId: z.number().int().optional(),
+  episodeNumber: z.number().int().nullish(),
+  seasonNumber: z.number().int().nullish(),
+  title: z.string().nullish(),
+  overview: z.string().nullish(),
+  airDate: z.string().date().nullish(),
+  airDateUtc: z.string().datetime().nullish(),
+  seriesId: z.number().int().nullish(),
+  tvdbId: z.number().int().nullish(),
 });
 
 export const SonarrEpisodeFileMediaInfo = z.object({
-  audioChannels: z.number().optional(),
-  audioCodec: z.string().optional(),
-  audioLanguages: z.array(z.string()).optional(),
-  height: z.number().int().optional(),
-  width: z.number().int().optional(),
-  subtitles: z.array(z.string()).optional(),
-  videoCodec: z.string().optional(),
-  videoDynamicRange: z.string().optional(),
-  videoDynamicRangeType: z.string().optional(),
+  audioChannels: z.number().nullish(),
+  audioCodec: z.string().nullish(),
+  audioLanguages: z.array(z.string()).nullish(),
+  height: z.number().int().nullish(),
+  width: z.number().int().nullish(),
+  subtitles: z.array(z.string()).nullish(),
+  videoCodec: z.string().nullish(),
+  videoDynamicRange: z.string().nullish(),
+  videoDynamicRangeType: z.string().nullish(),
 });
 
 export const SonarrEpisodeFile = z.object({
   id: z.number().int(),
-  relativePath: z.string().optional(),
-  path: z.string().optional(),
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  releaseGroup: z.string().optional(),
-  sceneName: z.string().optional(),
-  size: z.number().int().optional(),
-  dateAdded: z.string().datetime().optional(),
-  mediaInfo: SonarrEpisodeFileMediaInfo.optional(),
-  sourcePath: z.string().optional(),
-  recycleBinPath: z.string().optional(),
+  relativePath: z.string().nullish(),
+  path: z.string().nullish(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  releaseGroup: z.string().nullish(),
+  sceneName: z.string().nullish(),
+  size: z.number().int().nullish(),
+  dateAdded: z.string().datetime().nullish(),
+  mediaInfo: SonarrEpisodeFileMediaInfo.nullish(),
+  sourcePath: z.string().nullish(),
+  recycleBinPath: z.string().nullish(),
 });
 
 export const SonarrEventType = z.enum([
@@ -94,54 +94,54 @@ export const SonarrReleaseType = z.enum([
 });
 
 export const SonarrGrabbedRelease = z.object({
-  releaseTitle: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
-  releaseType: SonarrReleaseType.optional(),
+  releaseTitle: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
+  releaseType: SonarrReleaseType.nullish(),
 });
 
 export const SonarrWebhookImage = z.object({
-  url: z.string().optional(),
-  remoteUrl: z.string().optional(),
+  url: z.string().nullish(),
+  remoteUrl: z.string().nullish(),
 });
 
 export const SonarrRelease = z.object({
-  quality: z.string().optional(),
-  qualityVersion: z.number().int().optional(),
-  releaseGroup: z.string().optional(),
-  releaseTitle: z.string().optional(),
-  indexer: z.string().optional(),
-  size: z.number().int().optional(),
-  customFormatScore: z.number().int().optional(),
-  customFormats: z.array(z.string()).optional(),
+  quality: z.string().nullish(),
+  qualityVersion: z.number().int().nullish(),
+  releaseGroup: z.string().nullish(),
+  releaseTitle: z.string().nullish(),
+  indexer: z.string().nullish(),
+  size: z.number().int().nullish(),
+  customFormatScore: z.number().int().nullish(),
+  customFormats: z.array(z.string()).nullish(),
 });
 
 export const SonarrRenamedEpisodeFile = z.object({
-  previousRelativePath: z.string().optional(),
-  relativePath: z.string().optional(),
+  previousRelativePath: z.string().nullish(),
+  relativePath: z.string().nullish(),
 });
 
 export const SonarrSeriesType = z.enum(["anime", "daily", "standard"]);
 
 export const SonarrSeries = z.object({
   id: z.number().int(),
-  title: z.string().optional(),
-  titleSlug: z.string().optional(),
-  path: z.string().optional(),
-  tvdbId: z.number().int().optional(),
-  tvMazeId: z.number().int().optional(),
-  imdbId: z.string().optional(),
-  seriesType: SonarrSeriesType.optional(),
-  year: z.number().int().optional(),
-  genres: z.array(z.string()).optional(),
-  images: z.array(SonarrWebhookImage).optional(),
-  tags: z.array(z.string()).optional(),
+  title: z.string().nullish(),
+  titleSlug: z.string().nullish(),
+  path: z.string().nullish(),
+  tvdbId: z.number().int().nullish(),
+  tvMazeId: z.number().int().nullish(),
+  imdbId: z.string().nullish(),
+  seriesType: SonarrSeriesType.nullish(),
+  year: z.number().int().nullish(),
+  genres: z.array(z.string()).nullish(),
+  images: z.array(SonarrWebhookImage).nullish(),
+  tags: z.array(z.string()).nullish(),
 });
 
 export const SonarrApplicationUpdatePayload = z.object({
-  message: z.string().optional(),
-  previousVersion: z.string().optional(),
-  newVersion: z.string().optional(),
+  message: z.string().nullish(),
+  previousVersion: z.string().nullish(),
+  newVersion: z.string().nullish(),
 });
 
 export const SonarrDeleteMediaFileReason = z.enum([
@@ -153,61 +153,61 @@ export const SonarrDeleteMediaFileReason = z.enum([
 ]);
 
 export const SonarrEpisodeDeletePayload = z.object({
-  series: SonarrSeries.optional(),
-  episodes: z.array(SonarrEpisode).optional(),
-  episodeFile: SonarrEpisodeFile.optional(),
-  deleteReason: SonarrDeleteMediaFileReason.optional(),
+  series: SonarrSeries.nullish(),
+  episodes: z.array(SonarrEpisode).nullish(),
+  episodeFile: SonarrEpisodeFile.nullish(),
+  deleteReason: SonarrDeleteMediaFileReason.nullish(),
 });
 
 export const SonarrGrabPayload = z.object({
-  series: SonarrSeries.optional(),
-  episodes: z.array(SonarrEpisode).optional(),
-  release: SonarrRelease.optional(),
-  downloadClient: z.string().optional(),
-  downloadClientType: z.string().optional(),
-  downloadId: z.string().optional(),
-  customFormatInfo: SonarrCustomFormatInfo.optional(),
+  series: SonarrSeries.nullish(),
+  episodes: z.array(SonarrEpisode).nullish(),
+  release: SonarrRelease.nullish(),
+  downloadClient: z.string().nullish(),
+  downloadClientType: z.string().nullish(),
+  downloadId: z.string().nullish(),
+  customFormatInfo: SonarrCustomFormatInfo.nullish(),
 });
 
 export const SonarrHealthPayload = z.object({
-  message: z.string().optional(),
-  type: z.string().optional(),
-  wikiUrl: z.string().optional(),
+  message: z.string().nullish(),
+  type: z.string().nullish(),
+  wikiUrl: z.string().nullish(),
   level: z.enum(["ok", "notice", "warning", "error"]),
 });
 
 export const SonarrImportPayload = z.object({
-  series: SonarrSeries.optional(),
-  episodes: z.array(SonarrEpisode).optional(),
-  episodeFiles: z.array(SonarrEpisodeFile).optional(),
-  isUpgrade: z.boolean().optional(),
-  downloadClient: z.string().optional(),
-  downloadClientType: z.string().optional(),
-  downloadId: z.string().optional(),
-  deletedFiles: z.array(SonarrEpisodeFile).optional(),
-  customFormatInfo: SonarrCustomFormatInfo.optional(),
-  release: SonarrGrabbedRelease.optional(),
-  fileCount: z.number().int().optional(),
-  sourcePath: z.string().optional(),
-  destinationPath: z.string().optional(),
+  series: SonarrSeries.nullish(),
+  episodes: z.array(SonarrEpisode).nullish(),
+  episodeFiles: z.array(SonarrEpisodeFile).nullish(),
+  isUpgrade: z.boolean().nullish(),
+  downloadClient: z.string().nullish(),
+  downloadClientType: z.string().nullish(),
+  downloadId: z.string().nullish(),
+  deletedFiles: z.array(SonarrEpisodeFile).nullish(),
+  customFormatInfo: SonarrCustomFormatInfo.nullish(),
+  release: SonarrGrabbedRelease.nullish(),
+  fileCount: z.number().int().nullish(),
+  sourcePath: z.string().nullish(),
+  destinationPath: z.string().nullish(),
 });
 
 export const SonarrManualInteractionRequiredPayload = z.object({
-  series: SonarrSeries.optional(),
-  episodes: z.array(SonarrEpisode).optional(),
-  downloadInfo: SonarrWebhookDownloadClientItem.optional(),
-  downloadClient: z.string().optional(),
-  downloadClientType: z.string().optional(),
-  downloadId: z.string().optional(),
+  series: SonarrSeries.nullish(),
+  episodes: z.array(SonarrEpisode).nullish(),
+  downloadInfo: SonarrWebhookDownloadClientItem.nullish(),
+  downloadClient: z.string().nullish(),
+  downloadClientType: z.string().nullish(),
+  downloadId: z.string().nullish(),
   downloadStatus: z.string(),
-  downloadStatusMessage: z.array(SonarrDownloadStatusMessage).optional(),
-  customFormatInfo: SonarrCustomFormatInfo.optional(),
-  release: SonarrGrabbedRelease.optional(),
+  downloadStatusMessage: z.array(SonarrDownloadStatusMessage).nullish(),
+  customFormatInfo: SonarrCustomFormatInfo.nullish(),
+  release: SonarrGrabbedRelease.nullish(),
 });
 
 export const SonarrRenamePayload = z.object({
-  series: SonarrSeries.optional(),
-  renamedEpisodeFiles: z.array(SonarrRenamedEpisodeFile).optional(),
+  series: SonarrSeries.nullish(),
+  renamedEpisodeFiles: z.array(SonarrRenamedEpisodeFile).nullish(),
 });
 
 export const SonarrSeriesAddPayload = z.object({
