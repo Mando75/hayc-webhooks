@@ -1,5 +1,5 @@
-import {z} from "zod";
-import {SonarrReleaseType} from "./sonarr-webhook-common.ts";
+import { z } from "zod";
+import { SonarrReleaseType } from "./sonarr-webhook-common.ts";
 
 const SonarrQualityModel = z.object({
   quality: z.object({
