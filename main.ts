@@ -22,4 +22,4 @@ app.post("/webhooks/sonarr", async (c) => {
   return c.json({ message: "OK" }, 200);
 });
 
-Deno.serve(app.fetch);
+Deno.serve({ port: config.port }, app.fetch);
