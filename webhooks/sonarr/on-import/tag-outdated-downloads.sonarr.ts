@@ -1,17 +1,17 @@
-import { SonarrOnGrabPayload } from "../../../schemas/sonarr-webhook-payload.ts";
+import { SonarrOnDownloadPayload } from "../../../schemas/sonarr-webhook-payload.ts";
 import { SonarrWebhookContext } from "../../SonarrWebhook.ts";
-import { SonarrOnGrabHooks } from "../../../config/sonarr.hooks.ts";
+import { SonarrOnDownloadHooks } from "../../../config/sonarr.hooks.ts";
 import { SonarrApi } from "../../../clients/sonarr.api.ts";
-import { tagDownloads } from "../../common/on-grab/tag-outdated-downloads.common.ts";
+import { tagDownloads } from "../../common/on-import/tag-outdated-downloads.common.ts";
 
 type TagOutdatedDownloadsConfig =
-  NonNullable<SonarrOnGrabHooks>[number]["action"] extends
-    "tag-outdated-downloads" ? NonNullable<SonarrOnGrabHooks>[number]
+  NonNullable<SonarrOnDownloadHooks>[number]["action"] extends
+    "tag-outdated-downloads" ? NonNullable<SonarrOnDownloadHooks>[number]
     : never;
 
 export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
   return async (
-    webhook: SonarrOnGrabPayload,
+    webhook: SonarrOnDownloadPayload,
     context: SonarrWebhookContext,
   ): Promise<void> => {
     if (!webhook.series) {
@@ -32,7 +32,7 @@ export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
 }
 
 async function getOutdatedDownloadHashes(
-  webhook: SonarrOnGrabPayload,
+  webhook: SonarrOnDownloadPayload,
   sonarr: SonarrApi,
 ): Promise<Array<string>> {
   if (!webhook.series) {

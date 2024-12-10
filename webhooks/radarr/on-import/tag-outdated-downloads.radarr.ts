@@ -1,16 +1,17 @@
-import { RadarrOnGrabHooks } from "../../../config/radarr.hooks.ts";
-import { RadarrOnGrabPayload } from "../../../schemas/radarr-webhook-payload.ts";
+import { RadarrOnDownloadHooks } from "../../../config/radarr.hooks.ts";
+import { RadarrOnDownloadPayload } from "../../../schemas/radarr-webhook-payload.ts";
 import { RadarrWebhookContext } from "../../RadarrWebhook.ts";
 import { RadarrApi } from "../../../clients/radarr.api.ts";
-import { tagDownloads } from "../../common/on-grab/tag-outdated-downloads.common.ts";
+import { tagDownloads } from "../../common/on-import/tag-outdated-downloads.common.ts";
 
 type TagOutdatedDownloadsConfig =
-  NonNullable<RadarrOnGrabHooks>[number]["action"] extends
-    "tag-outdated-downloads" ? NonNullable<RadarrOnGrabHooks>[number] : never;
+  NonNullable<RadarrOnDownloadHooks>[number]["action"] extends
+    "tag-outdated-downloads" ? NonNullable<RadarrOnDownloadHooks>[number]
+    : never;
 
 export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
   return async (
-    webhook: RadarrOnGrabPayload,
+    webhook: RadarrOnDownloadPayload,
     context: RadarrWebhookContext,
   ): Promise<void> => {
     console.log(`Received grab for ${webhook.movie.title}:${webhook.movie.id}`);
@@ -23,7 +24,7 @@ export function tagOutdatedDownloads(config: TagOutdatedDownloadsConfig) {
 }
 
 async function getOutdatedDownloadHashes(
-  webhook: RadarrOnGrabPayload,
+  webhook: RadarrOnDownloadPayload,
   radarrApi: RadarrApi,
 ): Promise<Array<string>> {
   const history = (await radarrApi.getMovieHistory(webhook.movie.id, "grabbed"))

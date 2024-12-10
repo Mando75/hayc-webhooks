@@ -4,10 +4,7 @@ export const unsupported = z.object({ action: z.literal("_unsupported") });
 
 export const radarrOnGrabHooks = z.array(
   z.discriminatedUnion("action", [
-    z.object({
-      action: z.literal("tag-outdated-downloads"),
-      tag: z.string().default("radarr-upgraded"),
-    }),
+    unsupported,
   ]),
 )
   .optional();
@@ -15,7 +12,12 @@ export type RadarrOnGrabHooks = z.infer<typeof radarrOnGrabHooks>;
 
 export const radarrOnDownloadHooks = z.array(z.discriminatedUnion(
   "action",
-  [unsupported],
+  [
+    z.object({
+      action: z.literal("tag-outdated-downloads"),
+      tag: z.string().default("radarr-upgraded"),
+    }),
+  ],
 ))
   .optional();
 export type RadarrOnDownloadHooks = z.infer<typeof radarrOnDownloadHooks>;

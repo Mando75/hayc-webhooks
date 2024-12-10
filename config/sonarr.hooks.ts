@@ -3,17 +3,17 @@ import { z } from "zod";
 export const unsupported = z.object({ action: z.literal("_unsupported") });
 export const sonarrOnGrabHooks = z.array(
   z.discriminatedUnion("action", [
-    z.object({
-      action: z.literal("tag-outdated-downloads"),
-      tag: z.string().default("sonarr-upgraded"),
-    }),
+    unsupported,
   ]),
 )
   .optional();
 export type SonarrOnGrabHooks = z.infer<typeof sonarrOnGrabHooks>;
 
 export const sonarrOnDownloadHooks = z.array(z.discriminatedUnion("action", [
-  unsupported,
+  z.object({
+    action: z.literal("tag-outdated-downloads"),
+    tag: z.string().default("sonarr-upgraded"),
+  }),
 ])).optional();
 export type SonarrOnDownloadHooks = z.infer<typeof sonarrOnDownloadHooks>;
 

@@ -1,5 +1,5 @@
 import { Config } from "../schemas/config.ts";
-import { tagOutdatedDownloads } from "./radarr/on-grab/tag-outdated-downloads.radarr.ts";
+import { tagOutdatedDownloads } from "./radarr/on-import/tag-outdated-downloads.radarr.ts";
 import { RadarrApi } from "../clients/radarr.api.ts";
 import { QbitApi } from "../clients/qbit.api.ts";
 import {
