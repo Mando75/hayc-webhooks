@@ -1,7 +1,7 @@
 import { SonarrApi } from "../clients/sonarr.api.ts";
 import { QbitApi } from "../clients/qbit.api.ts";
 import { Config } from "../schemas/config.ts";
-import { tagOutdatedDownloads } from "./sonarr/on-download/tag-outdated-downloads.sonarr.ts";
+import { tagOutdatedDownloads } from "./sonarr/on-grab/tag-outdated-downloads.sonarr.ts";
 import {
   SonarrOnApplicationUpdatePayload,
   SonarrOnDownloadPayload,

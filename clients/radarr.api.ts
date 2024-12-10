@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { RadarrHistorySchema } from "../schemas/radarr-history.ts";
+import {
+  RadarrHistory,
+  RadarrHistorySchema,
+} from "../schemas/radarr-history.ts";
 
 export class RadarrApi {
   private readonly apiKey: string;
@@ -30,8 +33,13 @@ export class RadarrApi {
     return headers;
   }
 
-  async getMovieHistory(movieId: number) {
+  async getMovieHistory(
+    movieId: number,
+    eventType?: RadarrHistory["eventType"],
+  ): Promise<Array<RadarrHistory>> {
     const searchParams = new URLSearchParams({ movieId: String(movieId) });
+    if (eventType) searchParams.set("eventType", eventType);
+
     const req = new Request(
       this.host + `/api/v3/history/movie?${searchParams}`,
       {

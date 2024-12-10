@@ -165,7 +165,7 @@ export const SonarrGrabPayload = z.object({
   release: SonarrRelease.nullish(),
   downloadClient: z.string().nullish(),
   downloadClientType: z.string().nullish(),
-  downloadId: z.string().nullish(),
+  downloadId: z.string(),
   customFormatInfo: SonarrCustomFormatInfo.nullish(),
 });
 

@@ -16,6 +16,10 @@ export const RadarrGrabbedHistoryResponseSchema = z.object({
   imdbId: z.string().nullish(),
 });
 
+export type RadarrGrabbedHistoryResponse = z.infer<
+  typeof RadarrGrabbedHistoryResponseSchema
+>;
+
 export const RadarrDownloadFailedHistorySchema = z.object({
   message: z.string(),
 });
