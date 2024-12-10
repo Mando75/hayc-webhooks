@@ -148,7 +148,7 @@ export const SonarrSeriesResource = z.object({
   titleSlug: z.string().nullish(),
   certification: z.string().nullish(),
   genres: z.array(z.string()).nullish(),
-  tags: z.array(z.string()).nullish(),
+  tags: z.array(z.coerce.string()).nullish(),
   added: z.string().nullish(),
   addOptions: z.object({
     ignoreEpisodesWithFiles: z.boolean().nullish(),
