@@ -1,5 +1,5 @@
 ### GET request to example server
-GET https://sonarr.bmuller.net/api/v3/history/series?seriesId=318&includeSeries=true
+GET https://sonarr.bmuller.net/api/v3/history/series?seriesId=319&includeSeries=true&includeEpisode=true&eventType=grabbed
 Accept: application/json
 X-Api-Key: {{apiKey}}
 ###
