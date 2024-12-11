@@ -11,7 +11,7 @@ export async function tagDownloads(
   }
 
   console.log(
-    "Found the following obsolete downloads in sonarr:",
+    "Found the following obsolete downloads in *arr history:",
     downloadHashes,
   );
   console.log(`Adding tag ${tag} to obsolete downloads`);
