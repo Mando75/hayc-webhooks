@@ -116,8 +116,6 @@ function findOutdatedDownloadsForSeasonPack(
     h.eventType === "grabbed" &&
     // that are not the current download
     h.downloadId !== currentDownload.downloadId &&
-    // which are of the same episode
-    h.episodeId === currentDownload.episodeId &&
     // which was grabbed before the current download
     h.date.localeCompare(currentDownload.date) <= 0
   );
