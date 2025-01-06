@@ -117,7 +117,7 @@ export const RadarrRenamedMovieFile = z.object({
 
 export const RadarrAddedPayload = z.object({
   movie: RadarrMovie.nullish(),
-  addMethod: z.enum(["Manual", "List", "Collection"]).nullish(),
+  addMethod: z.enum(["manual", "list", "collection"]).nullish(),
 });
 
 export const RadarrApplicationUpdatePayload = z.object({
